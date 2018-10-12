@@ -1,4 +1,4 @@
-package com.example.seongheonson.kakakoimagesearch;
+package com.seongheonson.kakakoimagesearch;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,9 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.seongheonson.kakakoimagesearch", appContext.getPackageName());
+        assertEquals("com.seongheonson.kakakoimagesearch", appContext.getPackageName());
     }
+
+
+
 }

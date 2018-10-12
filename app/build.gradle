@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.seongheonson.kakakoimagesearch"
+        applicationId "com.seongheonson.kakakoimagesearch"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
@@ -26,12 +26,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
 }
 
 dependencies {
     testImplementation deps.junit
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation deps.kotlin.stdlib
 
     implementation deps.support.appcompat
     implementation deps.support.recyclerview
@@ -56,13 +62,17 @@ dependencies {
     kapt deps.dagger.compiler
 
     implementation deps.rxjava2
+    implementation deps.rxjava2_adapter
     implementation deps.rx_android
 
     implementation deps.gson
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation deps.retrofit.adapter
     implementation deps.okhttp_logging_interceptor
 
     implementation deps.fresco
-
+}
+repositories {
+    mavenCentral()
 }

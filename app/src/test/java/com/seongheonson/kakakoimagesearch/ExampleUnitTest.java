@@ -1,4 +1,4 @@
-package com.example.seongheonson.kakakoimagesearch;
+package com.seongheonson.kakakoimagesearch;
 
 import org.junit.Test;
 

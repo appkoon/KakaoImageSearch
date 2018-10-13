@@ -1,8 +1,7 @@
 package com.seongheonson.kakakoimagesearch.bussines.networking
 
-import com.seongheonson.kakakoimagesearch.bussines.model.ImageSearch
+import com.seongheonson.kakakoimagesearch.bussines.model.Response
 import io.reactivex.Single
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,6 +13,6 @@ import retrofit2.http.Query
 interface KakaoService {
 
     @GET("search/image")
-    fun searchImages(@Query("query") query: String): Single<Response<ImageSearch>>
+    fun searchImages(@Query("query") query: String, @Query("page") page: Int, @Query("size") size: Int): Single<Response>
 
 }

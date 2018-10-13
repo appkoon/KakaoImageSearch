@@ -5,14 +5,14 @@ package com.seongheonson.kakakoimagesearch.bussines.model
  */
 
 data class Document (
-        private var collection: String,
-        private var thumbnail_url: String,
-        private var image_url: String,
-        private var width: Int,
-        private var height: Int,
-        private var display_sitename: String,
-        private var doc_url: String,
-        private var datetime: String
+        var collection: String,
+        var thumbnail_url: String,
+        var image_url: String,
+        var width: Int,
+        var height: Int,
+        var display_sitename: String,
+        var doc_url: String,
+        var datetime: String
 )
 
 /*

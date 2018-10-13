@@ -5,9 +5,9 @@ package com.seongheonson.kakakoimagesearch.bussines.model
  */
 
 data class Meta(
-        private var total_count: Int,
-        private var pageable_count: Int,
-        private var is_end: Boolean
+        var total_count: Int,
+        var pageable_count: Int,
+        var is_end: Boolean
 )
 
     /**

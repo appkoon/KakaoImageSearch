@@ -9,7 +9,7 @@ import android.content.Context
 
 class DeviceUtil(context: Context) {
 
-    var display = context.resources.displayMetrics
+    private var display = context.resources.displayMetrics!!
     var width = display.widthPixels
     var height = display.heightPixels
 

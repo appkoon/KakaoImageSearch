@@ -17,27 +17,28 @@ import com.seongheonson.kakakoimagesearch.util.DeviceUtil
  * Created by seongheonson on 2018. 10. 12..
  */
 
-class AdapterImage(private val documents:List<Document>, context: Context) : RecyclerView.Adapter<ImageViewHolder>() {
+class AdapterImage(val documents:MutableList<Document>, context: Context) : RecyclerView.Adapter<ImageViewHolder>() {
 
     val deviceUtil = DeviceUtil(context)
+    var onRepoItemClickListener: ((Document) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        view.layoutParams = RecyclerView.LayoutParams(1000, 500)
+        view.layoutParams = RecyclerView.LayoutParams(deviceUtil.width, 500)
         return ImageViewHolder(view)
     }
 
     override fun getItemCount(): Int = documents.size
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val uri = Uri.parse("http://frescolib.org/static/fresco-logo.png")
-        holder.imageView.setImageURI(uri)
+        val document = documents[position]
+        holder.imageView.setImageURI(document.image_url)
     }
 
 }
 
 class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    var imageView = view.findViewById(R.id.image_view) as ImageView
+    var imageView = view.findViewById(R.id.image_view) as SimpleDraweeView
 
 }

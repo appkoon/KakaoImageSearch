@@ -2,5 +2,7 @@
     <string name="app_name">카카오 이미지검색</string>
     <string name="BASE_URL">https://dapi.kakao.com/v2/search/image</string>
     <string name="API_KEY">40d6fa725be71d93c7f0754921a1ccaa</string>
-    <string name="search_placeholder">검색어를 입력하세요</string>
+    <string name="search_hint">검색어 입력</string>
+    <string name="retry">재검색</string>
+    <string name="empty_search_result"><b>%s</b> 검색결과가 없습니다.</string>
 </resources>

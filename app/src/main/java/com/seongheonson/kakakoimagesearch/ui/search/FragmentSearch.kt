@@ -106,10 +106,10 @@ class FragmentSearch : Fragment() {
                 is Error -> {
                     when (data) {
                         Error.NO_MORE_DATA -> {
-                            Snackbar.make(recyclerView, "마지막 페이지 입니다.", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(recyclerView, Error.NO_MORE_DATA.value, Snackbar.LENGTH_SHORT).show()
                         }
                         Error.NO_DATA -> {
-                            text_error.text = "검색결과가 없습니다."
+                            text_error.text = Error.NO_DATA.value
                             text_error.visibility = View.VISIBLE
                         }
                         Error.UNKNOWN, Error.TIMEOUT -> {
@@ -117,7 +117,7 @@ class FragmentSearch : Fragment() {
                             text_error.visibility = View.VISIBLE
                         }
                         Error.DISCONNECTED -> {
-                            text_error.text = "네트워트에 연결되어 있지 않습니다."
+                            text_error.text = Error.DISCONNECTED.value
                             text_error.visibility = View.VISIBLE
                         }
                     }
@@ -125,11 +125,10 @@ class FragmentSearch : Fragment() {
                 is MutableList<*> -> {
                     recyclerView.visibility = View.VISIBLE
                     if (refresh) adapter.documents.clear()
-                    adapter.documents.addAll((data as Collection<Document>))
+                    adapter.documents.addAll(data as MutableList<Document>)
                     adapter.notifyDataSetChanged()
                     if (refresh) recyclerView.scrollToPosition(0)
                     isLoading = false
-
                 }
             }
         }, 1000)

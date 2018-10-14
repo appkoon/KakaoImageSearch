@@ -2,8 +2,8 @@ package com.seongheonson.kakakoimagesearch.di.module
 
 import android.app.Application
 import android.content.Context
-import com.seongheonson.kakakoimagesearch.bussines.networking.KakaoService
-import com.seongheonson.kakakoimagesearch.bussines.networking.RetrofitHelper
+import com.seongheonson.kakakoimagesearch.business.networking.KakaoService
+import com.seongheonson.kakakoimagesearch.business.networking.RetrofitHelper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

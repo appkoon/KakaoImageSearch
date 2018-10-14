@@ -3,7 +3,7 @@ package com.seongheonson.kakakoimagesearch.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.seongheonson.kakakoimagesearch.R
-import com.seongheonson.kakakoimagesearch.ui.search.FragmentSearch
+import com.seongheonson.kakakoimagesearch.ui.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, FragmentSearch())
+                .replace(R.id.container, SearchFragment())
                 .commitNow()
     }
 

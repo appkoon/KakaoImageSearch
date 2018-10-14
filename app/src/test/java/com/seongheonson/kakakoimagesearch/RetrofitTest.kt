@@ -1,7 +1,7 @@
 package com.seongheonson.kakakoimagesearch
 
-import com.seongheonson.kakakoimagesearch.bussines.networking.KakaoService
-import com.seongheonson.kakakoimagesearch.bussines.networking.RetrofitHelper
+import com.seongheonson.kakakoimagesearch.business.networking.KakaoService
+import com.seongheonson.kakakoimagesearch.business.networking.RetrofitHelper
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

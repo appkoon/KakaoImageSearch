@@ -1,7 +1,6 @@
-package com.seongheonson.kakakoimagesearch.bussines.networking
+package com.seongheonson.kakakoimagesearch.business.networking
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getService
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -10,7 +9,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -62,7 +60,6 @@ class RetrofitHelper {
     fun getKakaoService() : KakaoService = getService(KakaoService::class.java)
 
     companion object {
-
         @SuppressLint("CheckResult")
         fun <T> request(single: Single<Response<T>>, listener: ApiListener<T>) {
             single.subscribeOn(Schedulers.io())

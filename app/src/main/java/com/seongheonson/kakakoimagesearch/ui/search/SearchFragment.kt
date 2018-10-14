@@ -11,16 +11,22 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.seongheonson.kakakoimagesearch.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.business.model.Document
 import com.seongheonson.kakakoimagesearch.business.networking.RetryCallback
 import com.seongheonson.kakakoimagesearch.business.networking.Status
 import com.seongheonson.kakakoimagesearch.databinding.FragmentSearchBinding
+import com.seongheonson.kakakoimagesearch.ui.Action
+import com.seongheonson.kakakoimagesearch.ui.ActionManager
+import com.seongheonson.kakakoimagesearch.ui.ActionType
+import com.seongheonson.kakakoimagesearch.ui.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -34,8 +40,11 @@ class SearchFragment : Fragment() {
 
     companion object {
         private const val GRID_COLUMN_COUNT = 1
+        fun newInstance(): SearchFragment = SearchFragment()
     }
 
+    var title = "이미지검색"
+    private var actionManager: ActionManager = ActionManager.instance
     private var refresh = true
     private lateinit var imageAdapter: ImageAdapter
     lateinit var binding: FragmentSearchBinding
@@ -43,6 +52,15 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by lazy {
         ViewModelProviders.of(this)[SearchViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.let{
+            it.setDisplayShowTitleEnabled(true)
+            it.setDisplayHomeAsUpEnabled(false)
+            it.title = title
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,11 +86,16 @@ class SearchFragment : Fragment() {
 //                .observeOn(AndroidSchedulers.mainThread())
                 .debounce(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .map { it.editable().toString() }
-                .subscribe {
-                   if (it.isNotEmpty()) {
+                .subscribe { it ->
+                    if (it.isNotEmpty()) {
                        dismissKeyboard()
                        refresh = true
                        viewModel.search(it, true)
+                       (activity as MainActivity).supportActionBar?.let{ bar ->
+                           title = "이미지검색 (검색어 : $it)"
+                           bar.title = title
+                           edit_query.setText("")
+                       }
                    }
                 }
 
@@ -118,9 +141,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun onListClicked(document: Document) {
-//        val data = Bundle()
-//        data.putParcelable(KEY_DATA, repo)
-//        actionManager.fire(Action(ActionType.ACTION_REPO, data))
+        val data = Bundle()
+        data.putParcelable(KEY_DATA, document)
+        actionManager.fire(Action(ActionType.DETAIL_IMAGE, data))
     }
 
     private fun dismissKeyboard() {

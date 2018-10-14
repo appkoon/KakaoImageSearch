@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -40,13 +41,18 @@ class ImageAdapter(val documents:MutableList<Document>, context: Context) : Recy
     override fun onBindViewHolder(holder: ImageHolder, position: Int) {
         val document = documents[position]
         val layoutParam = holder.itemView.layoutParams
-        val imageWidth = document.width
-        val imageHeight = document.height
-        val resizeDimension =  displayWidth / imageWidth
-//        layoutParam.width = displayWidth
-        layoutParam.height = imageHeight * resizeDimension
+        val imageWidth = document.width.toFloat()
+        val imageHeight = document.height.toFloat()
+        val rate = (displayWidth.toFloat() / imageWidth)
+        val resizeHeight = (imageHeight * rate)
+        Log.e("good", "getResize = $imageWidth x $imageHeight = ${imageWidth / imageHeight} " +
+                                 "/ $displayWidth x $resizeHeight = ${displayWidth.toFloat() / resizeHeight}")
+        layoutParam.height = resizeHeight.toInt()
         holder.itemView.requestLayout()
         holder.bind(Uri.parse(document.image_url))
+        holder.itemView.setOnClickListener { _ ->
+            onRepoItemClickListener?.let { it(documents[holder.adapterPosition]) }
+        }
     }
 
 }

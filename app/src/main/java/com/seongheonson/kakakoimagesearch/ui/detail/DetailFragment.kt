@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import com.seongheonson.kakakoimagesearch.api.KEY_DATA
+import com.seongheonson.kakakoimagesearch.common.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.databinding.FragmentDetailBinding
 import com.seongheonson.kakakoimagesearch.di.Injectable

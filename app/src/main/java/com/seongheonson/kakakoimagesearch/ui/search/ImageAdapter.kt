@@ -14,7 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.vo.Document
-import com.seongheonson.kakakoimagesearch.ui.getResizedHeight
+import com.seongheonson.kakakoimagesearch.common.getResizedHeight
 
 
 /**

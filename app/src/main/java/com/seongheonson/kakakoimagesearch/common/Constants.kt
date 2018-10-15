@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.api
+package com.seongheonson.kakakoimagesearch.common
 
 const val NAMED_REST_API_URL = "rest_api_url"
 const val NAMED_REST_API_KEY = "rest_api_key"

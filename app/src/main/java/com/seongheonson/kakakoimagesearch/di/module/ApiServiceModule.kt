@@ -1,6 +1,10 @@
 package com.seongheonson.kakakoimagesearch.di.module
 
 import com.seongheonson.kakakoimagesearch.api.*
+import com.seongheonson.kakakoimagesearch.common.API_REST_KEY
+import com.seongheonson.kakakoimagesearch.common.API_REST_URL
+import com.seongheonson.kakakoimagesearch.common.NAMED_REST_API_KEY
+import com.seongheonson.kakakoimagesearch.common.NAMED_REST_API_URL
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

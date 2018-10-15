@@ -18,7 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.jakewharton.rxbinding2.widget.RxTextView
-import com.seongheonson.kakakoimagesearch.api.KEY_DATA
+import com.seongheonson.kakakoimagesearch.common.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.vo.Document
 import com.seongheonson.kakakoimagesearch.api.Status

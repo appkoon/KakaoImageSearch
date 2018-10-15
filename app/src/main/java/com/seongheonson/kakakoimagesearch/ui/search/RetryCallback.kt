@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.seongheonson.kakakoimagesearch.api
+package com.seongheonson.kakakoimagesearch.ui.search
 
 /**
  * Generic interface for retry buttons.

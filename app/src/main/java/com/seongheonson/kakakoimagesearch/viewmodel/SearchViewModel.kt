@@ -29,7 +29,7 @@ import javax.inject.Singleton
 class SearchViewModel @Inject constructor(private val repository: KakaoRepository) : ViewModel() {
 
     private var page = 1
-    private var size = 20
+    private var size = 10
     var query = ""
     private var isEnd = false
 

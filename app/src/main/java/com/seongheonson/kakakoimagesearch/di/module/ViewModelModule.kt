@@ -34,11 +34,6 @@ abstract class ViewModelModule {
     @ViewModelKey(SearchViewModel::class)
     abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(DetailViewModel::class)
-//    abstract fun bindRepoViewModel(detailViewModel: DetailViewModel): ViewModel
-
     @Binds
     abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
 }

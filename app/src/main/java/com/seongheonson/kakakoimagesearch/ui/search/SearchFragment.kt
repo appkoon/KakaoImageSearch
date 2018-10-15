@@ -21,7 +21,6 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.seongheonson.kakakoimagesearch.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.vo.Document
-import com.seongheonson.kakakoimagesearch.api.RetryCallback
 import com.seongheonson.kakakoimagesearch.api.Status
 import com.seongheonson.kakakoimagesearch.databinding.FragmentSearchBinding
 import com.seongheonson.kakakoimagesearch.di.Injectable
@@ -30,6 +29,7 @@ import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import com.seongheonson.kakakoimagesearch.ui.ActionType
 import com.seongheonson.kakakoimagesearch.ui.MainActivity
 import com.seongheonson.kakakoimagesearch.viewmodel.SearchViewModel
+import dagger.android.support.AndroidSupportInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -57,12 +57,10 @@ class SearchFragment : Fragment(), Injectable {
         fun newInstance(): SearchFragment = SearchFragment()
     }
 
-
     private var title = "이미지검색"
     private var refreshList: Boolean = false
     private lateinit var imageAdapter: ImageAdapter
     lateinit var binding: FragmentSearchBinding
-
 
     override fun onResume() {
         super.onResume()
@@ -77,11 +75,12 @@ class SearchFragment : Fragment(), Injectable {
         super.onCreate(savedInstanceState)
         imageAdapter = ImageAdapter(mutableListOf(), activity!!)
         imageAdapter.onRepoItemClickListener = ::onListClicked
+        searchViewModel.responseLiveData.observe(this, Observer<List<Document>>(::onChanged))
+        searchViewModel.messageLiveData.observe(this, Observer<String>(::onChanged))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("good", "onCreateView")
-//        searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         binding.viewModel = searchViewModel
         return binding.root
@@ -90,12 +89,10 @@ class SearchFragment : Fragment(), Injectable {
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchViewModel.responseLiveData.observe(this, Observer<List<Document>>(::onChanged))
-        searchViewModel.messageLiveData.observe(this, Observer<String>(::onChanged))
+
         initRecyclerView()
         RxTextView.afterTextChangeEvents(edit_query)
                 .subscribeOn(Schedulers.newThread())
-//                .observeOn(AndroidSchedulers.mainThread())
                 .debounce(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .map { it.editable().toString() }
                 .subscribe { it ->
@@ -120,7 +117,6 @@ class SearchFragment : Fragment(), Injectable {
 
     private fun initRecyclerView() {
         with(recyclerView) {
-//            layoutManager = LinearLayoutManager(context)
             layoutManager = GridLayoutManager(context, GRID_COLUMN_COUNT, GridLayoutManager.VERTICAL, false)
             adapter = imageAdapter
             addOnScrollListener(object : RecyclerView.OnScrollListener() {

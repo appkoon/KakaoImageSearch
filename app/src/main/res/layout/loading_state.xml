@@ -6,13 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.seongheonson.kakakoimagesearch.business.api.Status" />
+        <import type="com.seongheonson.kakakoimagesearch.api.Status" />
 
         <variable name="viewModel"
             type="com.seongheonson.kakakoimagesearch.viewmodel.SearchViewModel" />
         <variable
             name="callback"
-            type="com.seongheonson.kakakoimagesearch.business.api.RetryCallback" />
+            type="com.seongheonson.kakakoimagesearch.ui.search.RetryCallback" />
     </data>
 
     <LinearLayout

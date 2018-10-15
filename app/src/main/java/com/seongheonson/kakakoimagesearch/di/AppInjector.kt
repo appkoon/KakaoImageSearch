@@ -22,15 +22,15 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
-import com.seongheonson.kakakoimagesearch.BaseApp
+import com.seongheonson.kakakoimagesearch.App
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
 object AppInjector {
-    fun init(baseApp: BaseApp) {
-        DaggerAppComponent.builder().application(baseApp).build().inject(baseApp)
-        baseApp.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+    fun init(app: App) {
+        DaggerAppComponent.builder().application(app).build().inject(app)
+        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                     handleActivity(activity)
                 }

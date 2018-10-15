@@ -1,7 +1,7 @@
 package com.seongheonson.kakakoimagesearch.di
 
 import android.app.Application
-import com.seongheonson.kakakoimagesearch.BaseApp
+import com.seongheonson.kakakoimagesearch.App
 import com.seongheonson.kakakoimagesearch.di.module.ApiServiceModule
 import com.seongheonson.kakakoimagesearch.di.module.AppModule
 import com.seongheonson.kakakoimagesearch.di.module.MainActivityModule
@@ -25,5 +25,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(baseApp: BaseApp)
+    fun inject(app: App)
 }

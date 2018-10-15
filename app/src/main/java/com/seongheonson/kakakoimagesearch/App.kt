@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Created by seongheonson on 2018. 10. 12..
  */
 
-class BaseApp : Application(), HasActivityInjector {
+class App : Application(), HasActivityInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>

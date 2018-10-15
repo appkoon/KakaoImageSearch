@@ -8,9 +8,11 @@ versions.constraint_layout = "1.1.3"
 versions.lifecycle = "1.1.1"
 versions.room = "1.1.1"
 versions.rxjava2 = "2.1.3"
+versions.rxjava2_adapter = "2.3.0"
 versions.rx_android = "2.0.1"
 versions.dagger = "2.16"
 versions.retrofit = "2.3.0"
+versions.retrofit_adapter = "2.0.2"
 versions.gson = "2.8.2"
 versions.okhttp_logging_interceptor = "3.9.0"
 versions.databinding = "3.1.3"
@@ -54,6 +56,7 @@ deps.lifecycle = lifecycle
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
 retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.adapter = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit_adapter"
 retrofit.mock = "com.squareup.retrofit2:retrofit-mock:$versions.retrofit"
 deps.retrofit = retrofit
 deps.gson = "com.google.code.gson:gson:$versions.gson"
@@ -68,6 +71,7 @@ dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$v
 deps.dagger = dagger
 
 deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rxjava2_adapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.rxjava2_adapter"
 deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
 
 deps.databinding = "com.android.databinding:compiler:$versions.databinding"

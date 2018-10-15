@@ -1,8 +1,7 @@
 package com.seongheonson.kakakoimagesearch.ui.detail
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,13 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.seongheonson.kakakoimagesearch.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
-import com.seongheonson.kakakoimagesearch.vo.Document
 import com.seongheonson.kakakoimagesearch.changeDateFormat
+import com.seongheonson.kakakoimagesearch.databinding.FragmentDetailBinding
 import com.seongheonson.kakakoimagesearch.di.Injectable
 import com.seongheonson.kakakoimagesearch.ui.MainActivity
-import com.seongheonson.kakakoimagesearch.viewmodel.DetailViewModel
+import com.seongheonson.kakakoimagesearch.vo.Document
 import kotlinx.android.synthetic.main.fragment_detail.*
-import javax.inject.Inject
 
 /**
  * Created by seongheonson on 2018. 10. 12..
@@ -25,13 +23,7 @@ import javax.inject.Inject
 
 class DetailFragment : Fragment(), Injectable {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-
-    private val viewModel: DetailViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
-    }
+    lateinit var binding: FragmentDetailBinding
 
     companion object {
         fun newInstance(repoBundle: Bundle?): DetailFragment {
@@ -41,14 +33,10 @@ class DetailFragment : Fragment(), Injectable {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_detail, null)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        return binding.root
     }
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -62,12 +50,12 @@ class DetailFragment : Fragment(), Injectable {
         }
 
         arguments?.getParcelable<Document>(KEY_DATA)?.let { document ->
-            draweeView.setImageURI(document.image_url)
-            text_size.text = "이미지 크기 : ${document.width} x ${document.height}"
-            text_sitename.text = "이미지 출처 : ${document.display_sitename}\n(${document.doc_url})"
-            text_date.text = "작성일시 : ${changeDateFormat(document.datetime)}"
+//            draweeView.setImageURI(document.image_url)
+//            text_size.text = "이미지 크기 : ${document.width} x ${document.height}"
+//            text_sitename.text = "이미지 출처 : ${document.display_sitename}\n(${document.doc_url})"
+//            text_date.text = "작성일시 : ${changeDateFormat(document.datetime)}"
+            binding.document = document
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:app="http://schemas.android.com/apk/res-auto"
+         xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.seongheonson.kakakoimagesearch.UtilsKt"/>
+
+        <variable
+            name="document"
+            type="com.seongheonson.kakakoimagesearch.vo.Document" />
+
+    </data>
+
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:actualImageScaleType="fitCenter"
+        app:imageUrl="@{document.image_url}"
         />
 
     <TextView
@@ -20,7 +32,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="@{@string/image_size(document.width, document.height)}"
+        tools:text="이미지 크기 : 000 x 000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/draweeView" />
@@ -32,7 +45,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="@{@string/image_site(document.display_sitename, document.doc_url)}"
+        tools:text="이미지 출처 : 다음 블로그"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_size" />
@@ -44,9 +58,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="TextView"
+        android:text="@{@string/image_date(UtilsKt.changeDateFormat(document.datetime))}"
+        tools:text="생성일시 : "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_sitename" />
 
 </android.support.constraint.ConstraintLayout>
+
+</layout>

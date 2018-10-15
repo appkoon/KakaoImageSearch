@@ -5,4 +5,7 @@
     <string name="search_hint">검색어 입력</string>
     <string name="retry">재검색</string>
     <string name="empty_search_result"><b>%s</b> 검색결과가 없습니다.</string>
+    <string name="image_size">이미지 크기 : %1$s x %2$s</string>
+    <string name="image_site">이미지 출처 : %1$s \n %2$s</string>
+    <string name="image_date">생성일시 : %s</string>
 </resources>

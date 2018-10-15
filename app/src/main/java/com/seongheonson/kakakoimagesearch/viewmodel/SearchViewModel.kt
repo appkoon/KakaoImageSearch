@@ -64,7 +64,7 @@ class SearchViewModel @Inject constructor(private val repository: KakaoRepositor
                         }
                     }, 1000)
                 } else {
-                    (messageLiveData as MutableLiveData<*>).value = Error.NO_MORE_DATA
+                    (messageLiveData as MutableLiveData<*>).value = Error.NO_MORE_DATA.value
                 }
             }
             override fun onError(throwable: Throwable) {

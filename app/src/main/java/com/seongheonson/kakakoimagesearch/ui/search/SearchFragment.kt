@@ -137,7 +137,7 @@ class SearchFragment : Fragment(), Injectable {
         binding.loadingMore = false
         when (data) {
             is String -> {
-                Snackbar.make(progress_load, data, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(recyclerView, data, Snackbar.LENGTH_SHORT).show()
             }
             is List<*> -> {
                 imageAdapter.setData(data as List<Document>, refreshList)

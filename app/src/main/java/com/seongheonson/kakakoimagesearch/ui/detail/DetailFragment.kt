@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import com.seongheonson.kakakoimagesearch.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.business.model.Document
+import com.seongheonson.kakakoimagesearch.changeDateFormat
+import com.seongheonson.kakakoimagesearch.di.Injectable
 import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import com.seongheonson.kakakoimagesearch.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -19,7 +21,7 @@ import java.text.SimpleDateFormat
  * Created by seongheonson on 2018. 10. 12..
  */
 
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(), Injectable {
 
     companion object {
         fun newInstance(repoBundle: Bundle?): DetailFragment {
@@ -28,8 +30,6 @@ class DetailFragment : Fragment() {
             return fragment
         }
     }
-
-    var actionManager: ActionManager = ActionManager.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,14 +54,8 @@ class DetailFragment : Fragment() {
         arguments?.getParcelable<Document>(KEY_DATA)?.let { document ->
             draweeView.setImageURI(document.image_url)
             text_size.text = "이미지 크기 : ${document.width} x ${document.height}"
-            text_sitename.text = "이미지 출처 : ${document.display_sitename} (${document.doc_url})"
-
-            val oldFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-            val date = oldFormat.parse(document.datetime)
-            val newFormat = SimpleDateFormat("yyyy년 mm월 dd일 HH시 mm분 ss초")
-            val updatedAt: String = newFormat.format(date)
-            text_date.text = "작성일시 : $updatedAt"
-
+            text_sitename.text = "이미지 출처 : ${document.display_sitename}\n(${document.doc_url})"
+            text_date.text = "작성일시 : ${changeDateFormat(document.datetime)}"
         }
 
     }

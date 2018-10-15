@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -15,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.business.model.Document
+import com.seongheonson.kakakoimagesearch.getResizedHeight
 
 
 /**
@@ -41,21 +41,15 @@ class ImageAdapter(val documents:MutableList<Document>, context: Context) : Recy
     override fun onBindViewHolder(holder: ImageHolder, position: Int) {
         val document = documents[position]
         val layoutParam = holder.itemView.layoutParams
-        val imageWidth = document.width.toFloat()
-        val imageHeight = document.height.toFloat()
-        val rate = (displayWidth.toFloat() / imageWidth)
-        val resizeHeight = (imageHeight * rate)
-        Log.e("good", "getResize = $imageWidth x $imageHeight = ${imageWidth / imageHeight} " +
-                                 "/ $displayWidth x $resizeHeight = ${displayWidth.toFloat() / resizeHeight}")
-        layoutParam.height = resizeHeight.toInt()
+        layoutParam.height = getResizedHeight(document.width, document.height, displayWidth)
         holder.itemView.requestLayout()
         holder.bind(Uri.parse(document.image_url))
         holder.itemView.setOnClickListener { _ ->
             onRepoItemClickListener?.let { it(documents[holder.adapterPosition]) }
         }
     }
-
 }
+
 
 data class ImageHolder(private val view: View, private val displayWidth: Int) : RecyclerView.ViewHolder(view) {
 
@@ -68,10 +62,10 @@ data class ImageHolder(private val view: View, private val displayWidth: Int) : 
     fun bind(uri: Uri) {
         itemView as? SimpleDraweeView ?: return
         itemView.controller = Fresco.newDraweeControllerBuilder()
-                .setImageRequest(ImageRequestBuilder.newBuilderWithSource(uri).build())
-                .setOldController(itemView.controller)
-                .setAutoPlayAnimations(true)
-                .build()
+                                    .setImageRequest(ImageRequestBuilder.newBuilderWithSource(uri).build())
+                                    .setOldController(itemView.controller)
+                                    .setAutoPlayAnimations(true)
+                                    .build()
     }
 
 }

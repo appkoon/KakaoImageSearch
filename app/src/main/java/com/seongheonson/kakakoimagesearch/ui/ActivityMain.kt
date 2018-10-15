@@ -8,10 +8,18 @@ import android.util.Log
 import com.seongheonson.kakakoimagesearch.R
 import com.seongheonson.kakakoimagesearch.ui.detail.DetailFragment
 import com.seongheonson.kakakoimagesearch.ui.search.SearchFragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-    var actionManager: ActionManager = ActionManager.instance
+    @Inject
+    lateinit var actionManager: ActionManager
+
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,4 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
         transaction.commit()
     }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 }

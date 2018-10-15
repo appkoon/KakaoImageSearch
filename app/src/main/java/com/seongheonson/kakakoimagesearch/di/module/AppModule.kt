@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.seongheonson.kakakoimagesearch.business.networking.KakaoService
 import com.seongheonson.kakakoimagesearch.business.networking.RetrofitHelper
+import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -22,8 +23,10 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGithubService(): KakaoService {
+    fun provideKakaoService(): KakaoService {
         return RetrofitHelper().getKakaoService()
     }
 
+    @Provides
+    fun provideActionManager(): ActionManager = ActionManager.instance
 }

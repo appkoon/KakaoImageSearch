@@ -23,6 +23,7 @@ import com.seongheonson.kakakoimagesearch.business.model.Document
 import com.seongheonson.kakakoimagesearch.business.networking.RetryCallback
 import com.seongheonson.kakakoimagesearch.business.networking.Status
 import com.seongheonson.kakakoimagesearch.databinding.FragmentSearchBinding
+import com.seongheonson.kakakoimagesearch.di.Injectable
 import com.seongheonson.kakakoimagesearch.ui.Action
 import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import com.seongheonson.kakakoimagesearch.ui.ActionType
@@ -31,20 +32,23 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 /**
  * Created by seongheonson on 2018. 10. 12..
  */
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), Injectable {
+
+    @Inject
+    lateinit var actionManager: ActionManager
 
     companion object {
         private const val GRID_COLUMN_COUNT = 1
         fun newInstance(): SearchFragment = SearchFragment()
     }
 
-    var title = "이미지검색"
-    private var actionManager: ActionManager = ActionManager.instance
+    private var title = "이미지검색"
     private var refresh = true
     private lateinit var imageAdapter: ImageAdapter
     lateinit var binding: FragmentSearchBinding
@@ -65,10 +69,10 @@ class SearchFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        imageAdapter = ImageAdapter(mutableListOf(), activity!!)
-        imageAdapter.onRepoItemClickListener = ::onListClicked
         viewModel.responseLiveData.observe(this, Observer<MutableList<Document>>(::onChanged))
         viewModel.messageLiveData.observe(this, Observer<String>(::onChanged))
+        imageAdapter = ImageAdapter(mutableListOf(), activity!!)
+        imageAdapter.onRepoItemClickListener = ::onListClicked
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

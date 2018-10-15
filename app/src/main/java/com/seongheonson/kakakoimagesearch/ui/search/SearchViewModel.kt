@@ -27,7 +27,7 @@ import java.net.SocketTimeoutException
 
 class SearchViewModel(val app: Application) : AndroidViewModel(app) {
 
-    private val reposresponseory = KakaoRepository()
+    private val kakaoRepository = KakaoRepository()
 
     private var page = 1
     private var size = 20
@@ -51,7 +51,7 @@ class SearchViewModel(val app: Application) : AndroidViewModel(app) {
             this.query = query
             dataCount.set(0)
         }
-        RetrofitHelper.request(reposresponseory.search(query, page, size), object : ApiListener<ImageSearch>{
+        RetrofitHelper.request(kakaoRepository.search(query, page, size), object : ApiListener<ImageSearch>{
             override fun onSuccess(response: ImageSearch) {
                 Log.e("good", "page = $page isEnd = ${response.meta.is_end} documents = ${response.documents.size}")
                 if (!isEnd){

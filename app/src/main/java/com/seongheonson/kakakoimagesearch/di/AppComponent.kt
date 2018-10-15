@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.di.component
+package com.seongheonson.kakakoimagesearch.di
 
 import android.app.Application
 import com.seongheonson.kakakoimagesearch.BaseApp

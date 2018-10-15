@@ -23,7 +23,7 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 @Singleton
-class KakaoViewModelFactory
+class AppViewModelFactory
 @Inject constructor(private val creators: Map<Class<out ViewModel>,
         @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
 

@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.business.model
+package com.seongheonson.kakakoimagesearch.vo
 
 import android.os.Parcel
 import android.os.Parcelable

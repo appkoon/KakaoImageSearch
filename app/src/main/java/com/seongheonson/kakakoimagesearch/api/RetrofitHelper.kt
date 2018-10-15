@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.business.networking
+package com.seongheonson.kakakoimagesearch.api
 
 import android.annotation.SuppressLint
 import io.reactivex.Single

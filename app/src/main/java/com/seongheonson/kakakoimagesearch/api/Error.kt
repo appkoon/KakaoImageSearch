@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.business.networking
+package com.seongheonson.kakakoimagesearch.api
 
 enum class Error(val value: String) {
     NO_DATA("검색결과가 없습니다."),

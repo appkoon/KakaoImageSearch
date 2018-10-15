@@ -13,7 +13,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.seongheonson.kakakoimagesearch.R
-import com.seongheonson.kakakoimagesearch.business.model.Document
+import com.seongheonson.kakakoimagesearch.vo.Document
 import com.seongheonson.kakakoimagesearch.getResizedHeight
 
 

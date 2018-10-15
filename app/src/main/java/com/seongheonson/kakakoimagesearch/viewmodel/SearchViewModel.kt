@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.ui.search
+package com.seongheonson.kakakoimagesearch.viewmodel
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
@@ -8,13 +8,13 @@ import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.os.Handler
 import android.util.Log
-import com.seongheonson.kakakoimagesearch.business.model.Document
-import com.seongheonson.kakakoimagesearch.business.model.ImageSearch
-import com.seongheonson.kakakoimagesearch.business.networking.ApiListener
-import com.seongheonson.kakakoimagesearch.business.networking.Error
-import com.seongheonson.kakakoimagesearch.business.networking.RetrofitHelper
-import com.seongheonson.kakakoimagesearch.business.networking.Status
-import com.seongheonson.kakakoimagesearch.business.repository.KakaoRepository
+import com.seongheonson.kakakoimagesearch.vo.Document
+import com.seongheonson.kakakoimagesearch.vo.ImageSearch
+import com.seongheonson.kakakoimagesearch.api.ApiListener
+import com.seongheonson.kakakoimagesearch.api.Error
+import com.seongheonson.kakakoimagesearch.api.RetrofitHelper
+import com.seongheonson.kakakoimagesearch.api.Status
+import com.seongheonson.kakakoimagesearch.repository.KakaoRepository
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException

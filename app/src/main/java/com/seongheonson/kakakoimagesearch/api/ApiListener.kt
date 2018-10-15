@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.business.networking
+package com.seongheonson.kakakoimagesearch.api
 
 /**
  * Created by seongheonson on 2018. 10. 12..

@@ -11,14 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.seongheonson.kakakoimagesearch.KEY_DATA
 import com.seongheonson.kakakoimagesearch.R
-import com.seongheonson.kakakoimagesearch.business.model.Document
+import com.seongheonson.kakakoimagesearch.vo.Document
 import com.seongheonson.kakakoimagesearch.changeDateFormat
 import com.seongheonson.kakakoimagesearch.di.Injectable
-import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import com.seongheonson.kakakoimagesearch.ui.MainActivity
-import com.seongheonson.kakakoimagesearch.ui.search.SearchViewModel
+import com.seongheonson.kakakoimagesearch.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
-import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 /**

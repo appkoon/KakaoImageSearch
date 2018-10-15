@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.ui.detail
+package com.seongheonson.kakakoimagesearch.viewmodel
 
 import android.arch.lifecycle.ViewModel
 

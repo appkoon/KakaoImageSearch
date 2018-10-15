@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch.business.model
+package com.seongheonson.kakakoimagesearch.vo
 
 /**
  * Created by seongheonson on 2018. 10. 12..

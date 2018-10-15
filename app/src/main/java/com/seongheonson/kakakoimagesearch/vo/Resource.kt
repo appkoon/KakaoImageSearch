@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.seongheonson.kakakoimagesearch.business.model
+package com.seongheonson.kakakoimagesearch.vo
 
-import com.seongheonson.kakakoimagesearch.business.networking.Status
+import com.seongheonson.kakakoimagesearch.api.Status
 
 /**
  * A generic class that holds a value with its loading status.

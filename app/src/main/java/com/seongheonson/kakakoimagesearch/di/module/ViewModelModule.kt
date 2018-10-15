@@ -18,10 +18,9 @@ package com.seongheonson.kakakoimagesearch.di.module
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.seongheonson.kakakoimagesearch.viewmodel.KakaoViewModelFactory
+import com.seongheonson.kakakoimagesearch.viewmodel.AppViewModelFactory
 import com.seongheonson.kakakoimagesearch.di.ViewModelKey
-import com.seongheonson.kakakoimagesearch.ui.detail.DetailViewModel
-import com.seongheonson.kakakoimagesearch.ui.search.SearchViewModel
+import com.seongheonson.kakakoimagesearch.viewmodel.SearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -41,5 +40,5 @@ abstract class ViewModelModule {
 //    abstract fun bindRepoViewModel(detailViewModel: DetailViewModel): ViewModel
 
     @Binds
-    abstract fun bindViewModelFactory(factory: KakaoViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
 }

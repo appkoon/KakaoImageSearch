@@ -1,6 +1,6 @@
-package com.seongheonson.kakakoimagesearch.business.networking
+package com.seongheonson.kakakoimagesearch.api
 
-import com.seongheonson.kakakoimagesearch.business.model.ImageSearch
+import com.seongheonson.kakakoimagesearch.vo.ImageSearch
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET

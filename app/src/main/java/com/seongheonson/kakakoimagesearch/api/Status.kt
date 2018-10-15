@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.seongheonson.kakakoimagesearch.business.networking
+package com.seongheonson.kakakoimagesearch.api
 
 /**
  * Status of a resource that is provided to the UI.

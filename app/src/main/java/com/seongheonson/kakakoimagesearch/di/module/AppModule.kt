@@ -12,11 +12,11 @@ import javax.inject.Singleton
 /**
  * Created by seongheonson on 2018. 10. 12..
  */
-@Module
+@Module(includes = [ViewModelModule::class])
 class AppModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideContext(application: Application): Context {
         return application
     }
@@ -27,6 +27,7 @@ class AppModule {
         return RetrofitHelper().getKakaoService()
     }
 
+    @Singleton
     @Provides
     fun provideActionManager(): ActionManager = ActionManager.instance
 }

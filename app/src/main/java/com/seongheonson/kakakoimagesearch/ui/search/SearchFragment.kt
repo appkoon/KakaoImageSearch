@@ -2,6 +2,7 @@ package com.seongheonson.kakakoimagesearch.ui.search
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.databinding.DataBindingUtil
@@ -43,20 +44,24 @@ class SearchFragment : Fragment(), Injectable {
     @Inject
     lateinit var actionManager: ActionManager
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val searchViewModel: SearchViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
+    }
+
     companion object {
         private const val GRID_COLUMN_COUNT = 1
         fun newInstance(): SearchFragment = SearchFragment()
     }
 
+
     private var title = "이미지검색"
-    private var refresh = true
+    private var refreshList: Boolean = false
     private lateinit var imageAdapter: ImageAdapter
     lateinit var binding: FragmentSearchBinding
 
-
-    private val viewModel: SearchViewModel by lazy {
-        ViewModelProviders.of(this)[SearchViewModel::class.java]
-    }
 
     override fun onResume() {
         super.onResume()
@@ -69,21 +74,23 @@ class SearchFragment : Fragment(), Injectable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.responseLiveData.observe(this, Observer<MutableList<Document>>(::onChanged))
-        viewModel.messageLiveData.observe(this, Observer<String>(::onChanged))
         imageAdapter = ImageAdapter(mutableListOf(), activity!!)
         imageAdapter.onRepoItemClickListener = ::onListClicked
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d("good", "onCreateView")
+//        searchViewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        binding.viewModel = viewModel
+        binding.viewModel = searchViewModel
         return binding.root
     }
 
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        searchViewModel.responseLiveData.observe(this, Observer<List<Document>>(::onChanged))
+        searchViewModel.messageLiveData.observe(this, Observer<String>(::onChanged))
         initRecyclerView()
         RxTextView.afterTextChangeEvents(edit_query)
                 .subscribeOn(Schedulers.newThread())
@@ -93,8 +100,8 @@ class SearchFragment : Fragment(), Injectable {
                 .subscribe { it ->
                     if (it.isNotEmpty()) {
                        dismissKeyboard()
-                       refresh = true
-                       viewModel.search(it, true)
+                       refreshList = true
+                       searchViewModel.search(it, true)
                        (activity as MainActivity).supportActionBar?.let{ bar ->
                            title = "이미지검색 (검색어 : $it)"
                            bar.title = title
@@ -105,7 +112,7 @@ class SearchFragment : Fragment(), Injectable {
 
         binding.callback = object : RetryCallback {
             override fun retry() {
-                viewModel.retry()
+                searchViewModel.retry()
             }
         }
     }
@@ -119,10 +126,10 @@ class SearchFragment : Fragment(), Injectable {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                     val lastPosition = layoutManager.findLastVisibleItemPosition()
-                    if (lastPosition == imageAdapter.itemCount - 1 &&  viewModel.status.get() == Status.SUCCESS) {
-                        refresh = false
+                    if (lastPosition == imageAdapter.itemCount - 1 &&  searchViewModel.status.get() == Status.SUCCESS) {
+                        refreshList = false
                         binding.loadingMore = true
-                        viewModel.searchNextPage()
+                        searchViewModel.searchNextPage()
                     }
                 }
             })
@@ -133,13 +140,14 @@ class SearchFragment : Fragment(), Injectable {
         binding.loadingMore = false
         when (data) {
             is String -> {
-                Snackbar.make(recyclerView, data, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(progress_load, data, Snackbar.LENGTH_SHORT).show()
             }
-            is MutableList<*> -> {
-                if (refresh) imageAdapter.documents.clear()
-                imageAdapter.documents.addAll(data as MutableList<Document>)
-                imageAdapter.notifyDataSetChanged()
-                if (refresh) recyclerView.scrollToPosition(0)
+            is List<*> -> {
+                imageAdapter.setData(data as List<Document>, refreshList)
+                if (refreshList) {
+                    recyclerView.scrollToPosition(0)
+                    refreshList = false
+                }
             }
         }
     }

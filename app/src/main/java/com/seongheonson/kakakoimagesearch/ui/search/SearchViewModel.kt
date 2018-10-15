@@ -1,10 +1,9 @@
 package com.seongheonson.kakakoimagesearch.ui.search
 
 import android.annotation.SuppressLint
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
 import android.os.Handler
@@ -19,15 +18,15 @@ import com.seongheonson.kakakoimagesearch.business.repository.KakaoRepository
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 /**
  * Created by seongheonson on 2018. 10. 13..
  */
-
-class SearchViewModel(val app: Application) : AndroidViewModel(app) {
-
-    private val kakaoRepository = KakaoRepository()
+@Singleton
+class SearchViewModel @Inject constructor(private val repository: KakaoRepository) : ViewModel() {
 
     private var page = 1
     private var size = 20
@@ -35,7 +34,7 @@ class SearchViewModel(val app: Application) : AndroidViewModel(app) {
     private var isEnd = false
 
     val messageLiveData: LiveData<String> by lazy { MutableLiveData<String>() }
-    val responseLiveData: LiveData<MutableList<Document>> by lazy { MutableLiveData<MutableList<Document>>() }
+    val responseLiveData: LiveData<List<Document>> by lazy { MutableLiveData<List<Document>>() }
 
     val status = ObservableField<Status>()
     val dataCount = ObservableInt()
@@ -51,7 +50,7 @@ class SearchViewModel(val app: Application) : AndroidViewModel(app) {
             this.query = query
             dataCount.set(0)
         }
-        RetrofitHelper.request(kakaoRepository.search(query, page, size), object : ApiListener<ImageSearch>{
+        RetrofitHelper.request(repository.search(query, page, size), object : ApiListener<ImageSearch>{
             override fun onSuccess(response: ImageSearch) {
                 Log.e("good", "page = $page isEnd = ${response.meta.is_end} documents = ${response.documents.size}")
                 if (!isEnd){

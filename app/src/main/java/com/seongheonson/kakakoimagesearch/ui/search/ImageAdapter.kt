@@ -21,7 +21,7 @@ import com.seongheonson.kakakoimagesearch.getResizedHeight
  * Created by seongheonson on 2018. 10. 12..
  */
 
-class ImageAdapter(val documents:MutableList<Document>, context: Context) : RecyclerView.Adapter<ImageHolder>() {
+class ImageAdapter(private val documents:MutableList<Document>, context: Context) : RecyclerView.Adapter<ImageHolder>() {
 
     private val displayWidth = context.resources.displayMetrics!!.widthPixels
     var onRepoItemClickListener: ((Document) -> Unit)? = null
@@ -47,6 +47,12 @@ class ImageAdapter(val documents:MutableList<Document>, context: Context) : Recy
         holder.itemView.setOnClickListener { _ ->
             onRepoItemClickListener?.let { it(documents[holder.adapterPosition]) }
         }
+    }
+
+    fun setData(documents: List<Document>, refreshList: Boolean) {
+        if (refreshList) this.documents.clear()
+        this.documents.addAll(documents)
+        notifyDataSetChanged()
     }
 }
 

@@ -23,7 +23,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import com.seongheonson.kakakoimagesearch.BaseApp
-import com.seongheonson.kakakoimagesearch.di.component.DaggerAppComponent
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector

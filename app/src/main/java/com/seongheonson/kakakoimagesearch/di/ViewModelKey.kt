@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.seongheonson.kakakoimagesearch.binding
+package com.seongheonson.kakakoimagesearch.di
 
-import android.databinding.DataBindingComponent
-import android.support.v4.app.Fragment
+import android.arch.lifecycle.ViewModel
+import dagger.MapKey
+import kotlin.reflect.KClass
 
-
-class FragmentDataBindingComponent(fragment: Fragment) : DataBindingComponent {
-    private val adapter = FragmentBindingAdapters(fragment)
-
-    override fun getFragmentBindingAdapters() = adapter
-}
+@MustBeDocumented
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY_GETTER,
+        AnnotationTarget.PROPERTY_SETTER
+)
+@Retention(AnnotationRetention.RUNTIME)
+@MapKey
+annotation class ViewModelKey(val value: KClass<out ViewModel>)

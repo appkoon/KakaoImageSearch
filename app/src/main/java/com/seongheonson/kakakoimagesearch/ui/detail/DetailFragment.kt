@@ -1,6 +1,8 @@
 package com.seongheonson.kakakoimagesearch.ui.detail
 
 import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -14,14 +16,24 @@ import com.seongheonson.kakakoimagesearch.changeDateFormat
 import com.seongheonson.kakakoimagesearch.di.Injectable
 import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import com.seongheonson.kakakoimagesearch.ui.MainActivity
+import com.seongheonson.kakakoimagesearch.ui.search.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 /**
  * Created by seongheonson on 2018. 10. 12..
  */
 
 class DetailFragment : Fragment(), Injectable {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
+    }
 
     companion object {
         fun newInstance(repoBundle: Bundle?): DetailFragment {

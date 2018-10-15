@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.seongheonson.kakakoimagesearch.di.AppInjector
-import com.seongheonson.kakakoimagesearch.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

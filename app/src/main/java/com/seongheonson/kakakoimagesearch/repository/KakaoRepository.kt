@@ -13,8 +13,7 @@ import javax.inject.Singleton
 @Singleton
 class KakaoRepository @Inject constructor(private val kakaoService: KakaoService) {
 
-//    private var kakaoService = RetrofitHelper().getService(KakaoService::class.java)
-
-    fun search(query: String, page: Int, size: Int) : Single<Response<ImageSearch>> = kakaoService.searchImages(query, page, size)
+    fun search(query: String, page: Int, size: Int) : Single<Response<ImageSearch>> =
+            kakaoService.searchImages(query, page, size)
 
 }

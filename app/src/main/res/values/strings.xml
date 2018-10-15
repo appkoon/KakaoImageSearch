@@ -8,4 +8,7 @@
     <string name="image_size">이미지 크기 : %1$s x %2$s</string>
     <string name="image_site">이미지 출처 : %1$s \n %2$s</string>
     <string name="image_date">생성일시 : %s</string>
+    <string name="search_title">이미지검색</string>
+    <string name="search_result">이미지검색 (검색어 : %s)</string>
+
 </resources>

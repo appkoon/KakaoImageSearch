@@ -2,8 +2,6 @@ package com.seongheonson.kakakoimagesearch.di.module
 
 import android.app.Application
 import android.content.Context
-import com.seongheonson.kakakoimagesearch.api.KakaoService
-import com.seongheonson.kakakoimagesearch.api.RetrofitHelper
 import com.seongheonson.kakakoimagesearch.ui.ActionManager
 import dagger.Module
 import dagger.Provides
@@ -21,11 +19,11 @@ class AppModule {
         return application
     }
 
-    @Singleton
-    @Provides
-    fun provideKakaoService(): KakaoService {
-        return RetrofitHelper().getKakaoService()
-    }
+//    @Singleton
+//    @Provides
+//    fun provideKakaoService(): KakaoService {
+//        return ApiRequest().getKakaoService()
+//    }
 
     @Singleton
     @Provides

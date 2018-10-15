@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.seongheonson.kakakoimagesearch.UtilsKt"/>
+        <import type="com.seongheonson.kakakoimagesearch.ui.UtilsKt"/>
 
         <variable
             name="document"

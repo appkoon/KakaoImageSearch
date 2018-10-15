@@ -1,4 +1,4 @@
-package com.seongheonson.kakakoimagesearch
+package com.seongheonson.kakakoimagesearch.ui
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

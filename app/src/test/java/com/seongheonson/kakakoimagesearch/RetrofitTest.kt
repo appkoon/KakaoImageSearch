@@ -1,7 +1,7 @@
 package com.seongheonson.kakakoimagesearch
 
 import com.seongheonson.kakakoimagesearch.api.KakaoService
-import com.seongheonson.kakakoimagesearch.api.RetrofitHelper
+import com.seongheonson.kakakoimagesearch.api.ApiRequest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +18,7 @@ class RetrofitTest {
 
     @Before
     fun beforeTest() {
-        kakaoService = RetrofitHelper().getService(KakaoService::class.java)
+        kakaoService = ApiRequest().getService(KakaoService::class.java)
     }
 
     @Test

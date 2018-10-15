@@ -10,9 +10,9 @@ import android.os.Handler
 import android.util.Log
 import com.seongheonson.kakakoimagesearch.vo.Document
 import com.seongheonson.kakakoimagesearch.vo.ImageSearch
-import com.seongheonson.kakakoimagesearch.api.ApiListener
+import com.seongheonson.kakakoimagesearch.api.ApiResponse
 import com.seongheonson.kakakoimagesearch.api.Error
-import com.seongheonson.kakakoimagesearch.api.RetrofitHelper
+import com.seongheonson.kakakoimagesearch.api.ApiRequest
 import com.seongheonson.kakakoimagesearch.api.Status
 import com.seongheonson.kakakoimagesearch.repository.KakaoRepository
 import retrofit2.HttpException
@@ -50,7 +50,7 @@ class SearchViewModel @Inject constructor(private val repository: KakaoRepositor
             this.query = query
             dataCount.set(0)
         }
-        RetrofitHelper.request(repository.search(query, page, size), object : ApiListener<ImageSearch>{
+        ApiRequest.request(repository.search(query, page, size), object : ApiResponse<ImageSearch>{
             override fun onSuccess(response: ImageSearch) {
                 Log.e("good", "page = $page isEnd = ${response.meta.is_end} documents = ${response.documents.size}")
                 if (!isEnd){
